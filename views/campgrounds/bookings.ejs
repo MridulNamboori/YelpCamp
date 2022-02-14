@@ -1,0 +1,60 @@
+<% layout('layouts/boilerplate')%>
+<div class="container d-flex justify-content-center align-items-center">
+  <div class="row">
+    <div class="col-md-6 offset-md-3 col-xl-6 offset-xl-3">
+      <div class="card shadow">
+        <img
+          src="https://images.unsplash.com/photo-1585195305593-df58f1c84763?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OTF8fGNhbXBpbmd8ZW58MHx8MHx8&auto=format&fit=crop&w=400&h=300&q=60"
+          alt=""
+          class="card-img-top"
+        />
+        <div class="card-body">
+          <h5 class="card-title">Your Bookings:</h5>
+
+          <ul class="list-group list-group-flush">
+            <% if(user.bookings.length === 0){ %>
+            <li class="list-group-item">
+              <p class="card-text text-muted fs-5">No Bookings found</p>
+            </li>
+            <% } %> <% for(let booking of user.bookings) { %>
+            <li class="list-group-item">
+              <div class="row">
+                <div class="col-8 mt-2">
+                  <a
+                    class="text-decoration-none link-info"
+                    href="/campgrounds/<%= booking.campground._id %>/booking/<%= booking._id %>"
+                    >View <%= booking.campground.title %> booking for <%=
+                    booking.arrivalDate %>
+                  </a>
+                </div>
+                <% const d1 = Date.now() %> <% const d2 = new
+                Date(booking.arrivalDate).getTime(); %> <% if(d1 < d2){ %>
+                <div class="col-4">
+                  <form
+                    class="d-inline"
+                    action="/campgrounds/<%=booking.campground._id%>/booking/<%=booking._id%>?_method=DELETE"
+                    method="POST"
+                  >
+                    <button
+                      class="btn btn-link link-danger text-decoration-none ml-2"
+                      role="link"
+                    >
+                      Cancel Booking
+                    </button>
+                  </form>
+                </div>
+                <% } %>
+              </div>
+            </li>
+            <% } %>
+          </ul>
+          <div class="mt-3">
+            <a class="text-decoration-none link-primary" href="/campgrounds"
+              >Back to Campgrounds</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

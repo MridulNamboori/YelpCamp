@@ -1,0 +1,135 @@
+<% layout('layouts/boilerplate')%>
+<div class="row">
+  <div id="alert"></div>
+  <h1 class="text-center">Campground Booking</h1>
+  <h3 class="text-center mt-2 mb-0"><%= campground.title %></h3>
+  <h5 class="text-center my-0"><%= campground.location %></h5>
+  <div class="col-md-6 offset-md-3">
+    <form
+      action="/campgrounds/<%= campground._id %>/booking"
+      method="POST"
+      novalidate
+      class="validated-form"
+      enctype="multipart/form-data"
+    >
+    <h4 class="mt-4 mb-3">Booking Details:</h1>
+      <div class="mb-3">
+        <label class="form-label" for="numcamper">Number of Campers</label>
+        <div class="input-group">
+          <input
+            type="number"
+            class="form-control"
+            id="numcamper"
+            placeholder="0"
+            aria-label="numcamper"
+            name="booking[numMembers]"
+            required
+          />
+        </div>
+        <div class="valid-feedback">Looks good!</div>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label" for="numvehicle"
+          >Number of Vehicles to be parked</label
+        >
+        <div class="input-group">
+          <input
+            type="number"
+            class="form-control"
+            id="numvehicle"
+            placeholder="0"
+            aria-label="numvehicle"
+            name="booking[numVehicles]"
+            required
+          />
+        </div>
+        <div class="valid-feedback">Looks good!</div>
+      </div>
+      <div class="mb-3 row">
+        <label for="num-days" class="col-3 col-form-label">Night stay(s)</label>
+        <div class="col-3">
+          <div class="input-group">
+            <input
+              type="number"
+              class="form-control"
+              name="booking[numStay]"
+              id="num-days"
+              required
+            />
+            <div class="valid-feedback">Looks good!</div>
+          </div>
+        </div>
+        <label for="arrival-date" class="col-2 col-form-label"
+          >Arrival Date</label
+        >
+        <div class="col-4">
+          <div class="input-group date" id="datepicker">
+            <input
+              type="text"
+              class="form-control"
+              name="booking[arrivalDate]"
+              id="arrival-date"
+              required
+            />
+            <span class="input-group-append">
+              <span class="input-group-text bg-white d-block">
+                <i class="fa fa-calendar"></i>
+              </span>
+            </span>
+            <div class="valid-feedback">Looks good!</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label" for="address">Address</label>
+        <textarea
+          class="form-control"
+          type="text"
+          id="address"
+          name="booking[address]"
+          required
+        ></textarea>
+        <div class="valid-feedback">Looks good!</div>
+      </div>
+      <div class="mb-3">
+        <label class="form-label" for="contact">Contact Number</label>
+        <input class="form-control" type="number" id="contact" name="booking[contact]" required>
+        <div class="valid-feedback">
+            Looks good!
+        </div>
+      </div>
+      <div class="mb-3">
+        <div class="form-file custom-file">
+            <input type="file" class="form-file-input" id="image" name="image" multiple required>
+            <label class="form-file-label" for="image">
+                <span class="form-file-text custom-file-label">Any Identity Proof...  (Aadhaar card, Passport,    Driving License, Voter ID card)</span>
+                <span class="form-file-button">Browse</span>
+            </label>
+        </div>
+      </div>
+      <h4 class="mt-4 mb-3">Camper Details:</h4>
+      <div id="name-field" class="mb-3 row"></div>
+      <div class="mb-3 row">
+        <p class="lead fw-bold">Price Generated: <span id="price-field" class="fw-light"></span></p>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" required>
+        <label class="form-check-label" for="flexCheckDefault">
+          I hereby declare that the information provided herein is accurate, correct and complete and that the document(s) submitted along with this application form is/are genuine to my knowledge. If any information is found false in the future, I shall be held accused and necessary actions will be taken against me. 
+        </label>
+      </div>
+      <div class="my-3">
+        <button class="btn btn-success">Create Booking</button>
+        <a class="text-decoration-none link-light btn btn-secondary ml-2" href="/campgrounds/<%= campground._id %>">Cancel</a>
+      </div>
+    </form>
+    <p class="lead fs-6 mb-0"><span class="text-danger">Important:</span> Fitness Certificate Submission is mandatory.</p>
+    <p class="lead fs-6">Note: Children below the age of 8 years must not be included. Their entry is free of cost.</p>
+  </div>
+</div>
+
+<script>
+  const campPrice = <%= campground.price %>
+</script>

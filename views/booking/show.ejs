@@ -1,0 +1,141 @@
+<% layout('layouts/boilerplate')%>
+<div class="container">
+  <h1 class="text-center">Booking Summary</h1>
+  <h2 class="text-center mt-3 display-1 fs-2">
+    <%= booking.campground.title %>
+  </h2>
+  <h4 class="text-center display-1 fs-4"><%= booking.campground.location %></h4>
+  <h5 class="display-1 mt-5 mb-4 bg-success text-light fs-3">User Details</h5>
+  <div class="row">
+    <div class="col-3 offset-1">
+      <p class="fs-5">
+        <span class="fw-bold">Username: </span><%= booking.user.username %>
+      </p>
+    </div>
+    <div class="col-6 offset-2">
+      <p class="fs-5">
+        <span class="fw-bold">Email: </span><%= booking.user.email %>
+      </p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-3 offset-1">
+      <p class="fs-5">
+        <span class="fw-bold">Contact Number: </span><%= booking.contact %>
+      </p>
+    </div>
+    <div class="col-6 offset-2">
+      <p class="fs-5">
+        <span class="fw-bold">Address: </span><%= booking.address %>
+      </p>
+    </div>
+  </div>
+  <h5 class="display-1 mt-5 mb-4 bg-success text-light fs-3">
+    Booking Details
+  </h5>
+  <div class="row">
+    <div class="col-3 offset-1">
+      <p class="fs-5">
+        <span class="fw-bold">Number of Campers: </span><%= booking.numMembers
+        %>
+      </p>
+    </div>
+    <div class="col-6 offset-2">
+      <p class="fs-5">
+        <span class="fw-bold">Number of Vehicles required to be parked: </span
+        ><%= booking.numVehicles %>
+      </p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-3 offset-1">
+      <p class="fs-5">
+        <span class="fw-bold">Arrival Date: </span><%= booking.arrivalDate %>
+      </p>
+    </div>
+    <div class="col-6 offset-2">
+      <p class="fs-5">
+        <span class="fw-bold">Departure Date: </span><%= departureDate
+        %>
+      </p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-3 offset-1">
+      <p class="fs-5 fw-bold">Identity Proof:</p>
+    </div>
+  </div>
+  <% booking.images.forEach(function(img, i) { %>
+  <div class="row">
+    <div class="col-11 offset-1">
+      <img src="<%=img.thumbnail %>" class="img-thumbnail" alt="" />
+    </div>
+  </div>
+  <% })%>
+  <h5 class="display-1 mt-5 mb-4 bg-success text-light fs-3">
+    Camper(s) Details
+  </h5>
+  <div class="row">
+    <div class="col-10 offset-1">
+      <table class="table table-info table-hover table-striped table-bordered mt-2">
+        <thead>
+            <tr class="table-light">
+                <th scope="col" class="col-2 fs-3 text-center">S.No.</th>
+                <th scope="col" class="col-6 fs-3 text-center">Name</th>
+                <th scope="col" class="col-2 fs-3 text-center">Age</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% for(i=0; i<booking.person.length;++i){ %>
+                <tr>
+                    <th scope="row" class="fs-4 text-center"><%= i+1 %>.</th>
+                    <td class="fs-4 text-center"><%= booking.person[i].name %></td>
+                    <td class="fs-4 text-center"><%= booking.person[i].age %></td>
+                </tr>
+            <% } %>  
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <h5 class="display-1 mt-5 mb-4 bg-success text-light fs-3">
+    Payment Details
+  </h5>
+  <div class="row">
+      <div class="col-8 offset-1">
+        <p class="fs-5">Cost of Campground per day:</p>
+      </div>
+      <div class="col-1 offset-1">
+        <p class="fs-5 text-center">&#8377; <%= booking.campground.price %></p>
+      </div>
+  </div>
+  <div class="row">
+    <div class="col-8 offset-1">
+      <p class="fs-5">Number of Camper(s):</p>
+    </div>
+    <div class="col-1 offset-1">
+      <p class="fs-5 text-center"><%= booking.numMembers %></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-8 offset-1">
+      <p class="fs-5">Total number of days for camping:</p>
+    </div>
+    <div class="col-1 offset-1">
+      <p class="fs-5 text-center"><%= booking.numStay %></p>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-8 offset-1">
+      <p class="fs-5">Total Cost:</p>
+    </div>
+    <div class="col-1 offset-1">
+      <p class="fs-5 text-center">&#8377; <%= booking.price %></p>
+    </div>
+  </div>
+  <div class="row">
+      <div class="col-3 offset-1 my-4">
+          <a href="/campgrounds/<%= booking.campground._id %>" class="btn btn-secondary link-light text-decoration-none">Back to Campground</a>
+      </div>
+  </div>
+</div>

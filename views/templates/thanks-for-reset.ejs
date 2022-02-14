@@ -1,0 +1,29 @@
+<% layout('layouts/boilerplate')%>
+<div class="container">
+  <div class="row">
+    <div class="col-6 offset-3">
+      <i
+        class="fab fa-yammer fa-4x d-flex justify-content-center"
+        style="color: rgb(6, 252, 252)"
+      ></i>
+      <h3 class="text-center mt-3 mb-5">YelpCamp</h3>
+      <h5 class="text-center mb-3">Password Reset</h5>
+      <p class="lead font-weight-normal">
+        Thanks for being with us. Your request has been accepted. A reset email
+        is sent to <%= email %>. To reset your account's password, please follow
+        the instructions given in email.
+      </p>
+      <p class="lead font-weight-normal">
+        Don't receive any email...
+        <a class="text-decoration-none link-primary" href="/forgot-password"
+          >Click here</a
+        >
+      </p>
+      <p class="lead">
+        <a class="text-decoration-none link-info" href="/login"
+          >&gt;Back to Login</a
+        >
+      </p>
+    </div>
+  </div>
+</div>
